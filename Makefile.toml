@@ -1,0 +1,101 @@
+[config]
+default_to_workspace = false
+additional_profiles = ["debug"]
+
+[tasks.set-vars.env]
+RUSTFLAGS = "-Copt-level=s"
+MODE = "release"
+
+    [tasks.set-vars.env.debug]
+    RUSTFLAGS = ""
+    MODE = "debug"
+
+
+[tasks.build-client-debug]
+command = "cargo"
+toolchain = "stable"
+args = ["build", "-p", "client", "--target", "wasm32-unknown-unknown"]
+
+[tasks.build-client-release]
+extend = "build-client-debug"
+args = ["build", "-p", "client", "--target", "wasm32-unknown-unknown", "--release"]
+
+[tasks.build-client]
+run_task = [
+    { name = "build-client-debug", condition = { env = { MODE = "debug" } } },
+    { name = "build-client-release", condition = { env = { MODE = "release" } } },
+]
+dependencies = ["set-vars"]
+
+[tasks.copy-static-files]
+script_runner = "@duckscript"
+script = '''
+rm -r target/web
+glob_cp examples/client/web/static/**/* target/web/
+'''
+
+[tasks.rollup-scripts]
+command = "npx"
+args = [
+    "rollup",
+    "-p",
+    "@rollup/plugin-node-resolve",
+    "examples/client/web/material_web.index.js",
+    "-o",
+    "target/web/material_web.bundle.js",
+]
+
+[tasks.deploy-client]
+command = "wasm-bindgen"
+args = [
+    "--target",
+    "web",
+    "--no-typescript",
+    "--out-dir",
+    "target/web",
+    "--out-name",
+    "client",
+    "target/wasm32-unknown-unknown/${MODE}/client.wasm",
+]
+dependencies = ["set-vars", "copy-static-files", "rollup-scripts"]
+
+[tasks.client]
+dependencies = ["build-client", "deploy-client"]
+
+
+[tasks.run-server-debug]
+command = "cargo"
+toolchain = "stable"
+args = ["run", "-p", "server", "--release"]
+
+[tasks.run-server-release]
+extend = "run-server-debug"
+args = ["run", "-p", "server", "--release"]
+
+[tasks.run]
+run_task = [
+    { name = "run-server-debug", condition = { env = { MODE = "debug" } } },
+    { name = "run-server-release", condition = { env = { MODE = "release" } } },
+]
+dependencies = ["client"]
+
+[tasks.watch]
+toolchain = "stable"
+command = "cargo"
+args = ["watch", "-w", "examples/client", "-x", "make client"]
+
+
+[tasks.fmt]
+command = "cargo"
+toolchain = "nightly"
+args = ["fmt"]
+
+[tasks.fmt-check]
+command = "cargo"
+toolchain = "nightly"
+args = ["fmt", "--", "--check"]
+
+[tasks.clippy]
+command = "cargo"
+toolchain = "stable"
+args = ["clippy", "--all-targets", "--all-features"]

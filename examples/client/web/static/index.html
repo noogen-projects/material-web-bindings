@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+    <title>Material Web Bindings example</title>
+    <meta charset = "utf-8" />
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+
+    <link rel = "stylesheet" href = "/fonts/materialicons.css" />
+    <link rel = "stylesheet" href = "/fonts/materialsymbolsoutlined.css" />
+    <link rel = "stylesheet" href = "/fonts/roboto.css" />
+    <link rel = "stylesheet" type = "text/css" href = "/style.css" />
+</head>
+
+<body>
+    <script type = "module" src = "/material_web.bundle.js"></script>
+    <script type = "module">
+        // For more details see https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html
+        import init from '/client.js';
+        init();
+    </script>
+</body>
+</html>

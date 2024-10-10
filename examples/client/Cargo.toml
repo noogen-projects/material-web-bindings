@@ -1,0 +1,19 @@
+[package]
+name = "client"
+version = "0.1.0"
+authors = [
+    "Alexander Mescheryakov <freecoder.xx@gmail.com>",
+    "Noogen Team <info.noogen@gmail.com>",
+]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/noogen-projects/material-web-bindings"
+description = "The Material Design Web Components bindings example WASM client"
+
+[dependencies]
+console_error_panic_hook = "0.1"
+gloo-console = "0.3"
+gloo-net = "0.6"
+js-sys = "0.3"
+leptos = { version = "0.6", features = ["csr"] }
+material-web-bindings = { path = "../../bindings" }

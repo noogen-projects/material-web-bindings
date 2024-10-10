@@ -1,0 +1,10 @@
+[workspace]
+resolver = "2"
+members = [
+    "bindings",
+    "examples/client",
+    "examples/server",
+]
+
+[profile.release]
+lto = true

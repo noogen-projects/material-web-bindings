@@ -1,0 +1,129 @@
+:root {
+    --color-primary: #6750a4;
+    --color-secondary: #f3eef3;/* #fef7ff;*/
+    --color-border: #bdb9bd;
+
+    --card-hover-color: #6050a0/*f3f1f8*/;
+    --card-pressed-color: var(--md-sys-color-primary)/*e2deee*/;
+
+    font-family: 'Roboto', system-ui, sans-serif;
+    --md-sys-color-primary: var(--color-primary);
+    --md-sys-color-secondary: tomato;
+    --md-sys-color-outline: #79747e;
+    --md-sys-color-on-surface: #1d1b20;
+
+    --mdc-theme-primary: var(--md-sys-color-primary);
+    --mdc-theme-secondary: var(--md-sys-color-secondary);
+    --mdc-theme-on-surface: var(--md-sys-color-on-surface);
+
+    /* --mdc-theme-background: #fff;
+    --mdc-theme-surface: #fff;
+    --mdc-theme-error: #b00020;
+    --mdc-theme-on-primary: #fff;
+    --mdc-theme-on-secondary: #fff;
+    --mdc-theme-on-error: #fff; */
+
+    /*--md-ref-typeface-brand: 'Open Sans';
+    --md-ref-typeface-plain: system-ui; */
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-primary);
+}
+
+.top-app-bar {
+    height: 48px;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    padding: 0 4px;
+}
+
+.top-app-bar__section {
+    padding: 0 4px;
+    display: inline-flex;
+    flex: 1 1 auto;
+    align-items: center;
+}
+
+.top-app-bar__section-start {
+    justify-content: flex-start;
+    order: -1;
+}
+
+.top-app-bar__section-end {
+    justify-content: flex-end;
+    order: 1;
+}
+
+.top-app-bar__navigation-icon {
+    color: #fff;
+}
+
+.top-app-bar__title {
+    font-family: Roboto, sans-serif;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.0125em;
+    letter-spacing:  0.0125em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    padding-left: 12px;
+    padding-right: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.content-panel {
+    background-color: var(--color-secondary);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.block-panel {
+    background-color: white;
+    border-color: var(--color-border);
+    /* border-style: solid;
+    border-width: 1px; */
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.main-section {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    width: 200px;
+    height: 200px;
+    background-color: white; /*var(--color-secondary);*/
+    border-color: var(--color-border);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 16px;
+    position: relative;
+
+    --md-ripple-hover-color: var(--card-hover-color);
+    --md-ripple-pressed-color: var(--card-pressed-color);
+}
+
+.card:hover {
+    --md-elevation-level: 1;
+}
+
+.card-place {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
