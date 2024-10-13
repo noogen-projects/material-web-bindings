@@ -5,12 +5,42 @@ use web_sys::HtmlElement;
 extern "C" {
     #[wasm_bindgen(extends = HtmlElement)]
     pub type Tab;
+
+    #[wasm_bindgen(constructor, js_class = Tab)]
+    pub fn new() -> Tab;
+
+    #[wasm_bindgen(method, getter = isTab)]
+    pub fn is_tab(this: &Tab) -> bool;
+
+    #[wasm_bindgen(method, getter)]
+    pub fn active(this: &Tab) -> bool;
+
+    #[wasm_bindgen(method, setter = active)]
+    pub fn set_active(this: &Tab, active: bool);
+
+    #[wasm_bindgen(method, getter = hasIcon)]
+    pub fn has_icon(this: &Tab) -> bool;
+
+    #[wasm_bindgen(method, setter = hasIcon)]
+    pub fn set_has_icon(this: &Tab, has_icon: bool);
+
+    #[wasm_bindgen(method, getter = iconOnly)]
+    pub fn icon_only(this: &Tab) -> bool;
+
+    #[wasm_bindgen(method, setter = iconOnly)]
+    pub fn set_icon_only(this: &Tab, icon_only: bool);
 }
 
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(extends = HtmlElement, extends = Tab)]
     pub type PrimaryTab;
+
+    #[wasm_bindgen(method, getter = inlineIcon)]
+    pub fn inline_icon(this: &PrimaryTab) -> bool;
+
+    #[wasm_bindgen(method, setter = inlineIcon)]
+    pub fn set_inline_icon(this: &PrimaryTab, inline_icon: bool);
 }
 
 #[wasm_bindgen]
