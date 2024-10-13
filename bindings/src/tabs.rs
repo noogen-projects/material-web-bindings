@@ -21,7 +21,7 @@ extern "C" {
 
 #[wasm_bindgen]
 extern "C" {
-    #[wasm_bindgen]
+    #[wasm_bindgen(extends = HtmlElement)]
     pub type Tabs;
 
     #[wasm_bindgen(constructor, js_class = Tabs)]

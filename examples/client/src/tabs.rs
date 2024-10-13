@@ -1,7 +1,7 @@
 use leptos::{component, view, IntoView};
 use material_web_bindings::wasm_bindgen::JsCast;
 use material_web_bindings::web_sys::HtmlElement;
-use material_web_bindings::{dom, Tabs};
+use material_web_bindings::{dom, AsHtmlElement, Tabs};
 
 #[component]
 pub fn View() -> impl IntoView {
@@ -14,11 +14,9 @@ pub fn View() -> impl IntoView {
 
                 let tabs: Tabs = event
                     .target()
-                    .expect("")
+                    .expect("Event should have a target")
                     .unchecked_into();
-                let tab = tabs.active_tab();
-                let tab_element: &HtmlElement = tab.as_ref();
-                let panel_id = tab_element.get_attribute("aria-controls").unwrap_or_default();
+                let panel_id = tabs.active_tab().as_html_element().get_attribute("aria-controls").unwrap_or_default();
 
                 panel = dom::existing::select_element(&format!("#{panel_id}"));
                 panel.set_hidden(false);
